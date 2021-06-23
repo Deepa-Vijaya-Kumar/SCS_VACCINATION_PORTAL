@@ -20,7 +20,8 @@
             <button type="button" class="btn btn-primary" onclick= "booking()" id="register-btn" style="background-color: black;">Register</button>
             <a class="btn btn-success" href= "{{url_for('index')}}" id="register1-btn" style="background-color: black;">Back</a>
             <br/>
-            <span id="Error"></span>
+            <br/>
+            <span id="Error" style="font-weight: bold;"></span>
             <div id ="show_selection">
               <br>
               <p style="font-weight: bold;">Booked Successfully for {{ dose }} </p> <br>
@@ -92,7 +93,10 @@
         var date1 = '{{date}}';
         var dose='{{dose}}';
         var time='{{time}}';
-        var duration = { "BioNTech-Pfizer": 20};
+        var duration = { "BioNTech-Pfizer": 21,
+                        "AstraZeneca": 28,
+                      "Johnson & Johnson": 56,
+                    "Moderna":28};
   
 
         

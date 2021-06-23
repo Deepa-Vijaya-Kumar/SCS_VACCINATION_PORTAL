@@ -88,8 +88,10 @@ def get_request2(vaccine,district):
 
 @app.route("/booking/<string:vaccine>/<string:district>/<string:date>/<string:dose>/<string:health_id>/", methods=["GET"])
 def manipulate_db(district,vaccine,date,dose,health_id):
-    duration={'BioNTech-Pfizer': 21,
-               "AstraZeneca":28  }
+    duration={ "BioNTech-Pfizer": 21,
+                "AstraZeneca": 28,
+                "Johnson & Johnson": 56,
+                "Moderna":28}
 
     district_id = [
         (x[0]) for x in query_db("district")
