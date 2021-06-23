@@ -27,7 +27,20 @@ CREATE TABLE vaccine (
     FOREIGN KEY(district_id) REFERENCES district(id)
 );
 
+
+DROP TABLE IF EXISTS vaccine_status;
+CREATE TABLE vaccine_status (
+    health_id        INTEGER,
+    dose1_date       DATE,
+    dose2_date          DATE,
+    registration_token  VARCHAR(7),
+    vaccination_status  VARCHAR(5),
+    vaccine_name VARCHAR(20),
+    PRIMARY KEY(health_id)
+);
+
 COMMIT;
+
 
 INSERT INTO state (id, state_name) VALUES (1, "Hesse");
 INSERT INTO state (id, state_name) VALUES (2, "Rhineland-Palatinate");

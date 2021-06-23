@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flask - AJAX Form</title>
+    <title>Vaccination Portal</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
   </head>
@@ -13,14 +13,17 @@
         <form action="/book" method="POST">
             {{ form.hidden_tag() }}
             <h3>Enter your details</h3>
-            <h4>USER NAME:</h4></h2>{{ form.user_name(id="user_name", class="form-control") }}
+            <h4>FULL NAME:</h4></h2>{{ form.user_name(id="user_name", class="form-control") }}
             <br>
             <h4>HEALTH INSURANCE NUMBER:</h4></form>{{ form.proof_id(id="proof_id", class="form-control") }}
             <br><br>
             <button type="button" class="btn btn-primary" onclick= "booking()" id="register-btn" style="background-color: black;">Register</button>
             <a class="btn btn-success" href= "{{url_for('index')}}" id="register1-btn" style="background-color: black;">Back</a>
+            <br/>
+            <span id="Error"></span>
             <div id ="show_selection">
               <br>
+              <p style="font-weight: bold;">Booked Successfully for {{ dose }} </p> <br>
                 <p style="font-weight: bold;">Booking Details </p> <br>
                 <table class="paddingBetweenCols">
                   <tr>
@@ -40,6 +43,11 @@
                     <td><span id="chosen_date"></span><br/></td>
                   </tr>
                   <tr>
+                    <td>TIME</td>
+                    <td><span id="chosen_time"></span><br/></td>
+                  </tr>
+
+                  <tr>
                     <td>REGISTRATION TOKEN</td>
                     <td><span id="UID"></span><br/></td>
                   </tr>
@@ -51,6 +59,13 @@
                     <td>HEALTH INSURANCE NUMBER</td>
                     <td><span id="chosen_proof_id"></span><br/></td>
                   </tr>
+                  {% if dose=="Dose-1" %}
+
+                  <tr>
+                    <td>NEXT DUE DATE</td>
+                    <td><span id="chosen_new_date"></span><br/></td>
+                  </tr>
+                  {% endif %}
                   
 <!--                 
                 <span id="chosen_district"></span><br/>
@@ -75,41 +90,78 @@
         var vaccine = '{{vaccine}}';
         var date = '{{date}}';
         var date1 = '{{date}}';
+        var dose='{{dose}}';
+        var time='{{time}}';
+        var duration = { "BioNTech-Pfizer": 20};
+  
+
+        
 
         if (date=='today') {
           var today = new Date();
+          var new_due_date = new Date();
           var dd = String(today.getDate()).padStart(2, '0');
           var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
           var yyyy = today.getFullYear();
+          
           today = mm + '/' + dd + '/' + yyyy;
-          date1=today
+          date1=today;
+          new_due_date.setDate(new_due_date.getDate() + duration[vaccine]);
+          var dd = String(new_due_date.getDate()).padStart(2, '0');
+          var mm = String(new_due_date.getMonth() + 1).padStart(2, '0'); //January is 0!
+          var yyyy = new_due_date.getFullYear();
+          new_due_date = mm + '/' + dd + '/' + yyyy;
+
         }
         else if (date=='tomorrow') {
           var today = new Date();
+          var new_due_date = new Date();
           var dd = String(today.getDate()+ 1).padStart(2, '0');
           var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
           var yyyy = today.getFullYear();
-          today = mm + '/' + dd + '/' + yyyy;
-          date1=today
-        }
 
+          today = mm + '/' + dd + '/' + yyyy;
+          date1=today;
+          new_due_date.setDate(new_due_date.getDate() + duration[vaccine]+ 1);
+          var dd = String(new_due_date.getDate()).padStart(2, '0');
+          var mm = String(new_due_date.getMonth() + 1).padStart(2, '0'); //January is 0!
+          var yyyy = new_due_date.getFullYear();
+          new_due_date = mm + '/' + dd + '/' + yyyy;
+          
+        }
+        
         document.getElementById("chosen_state").innerHTML=state;
         document.getElementById("chosen_district").innerHTML=district;
         document.getElementById("chosen_vaccine").innerHTML=vaccine;
         document.getElementById("chosen_date").innerHTML=date1;
-
+        if(dose=='Dose-1')
+        {
+        document.getElementById("chosen_new_date").innerHTML=new_due_date;
+        }
+        document.getElementById("chosen_time").innerHTML=time;
 
         function booking() {
-          var vaccine_slot = $.ajax({
+        var health_id=document.getElementById("proof_id").value;
+        var vaccine_slot = $.ajax({
         type: 'GET',
-        url: '/booking/' + vaccine + '/' +district +'/' + date + '/'
+        url: '/booking/' + vaccine + '/' +district +'/' + date +'/'+dose+'/' +health_id+'/'
         });
         vaccine_slot.done(function(data){
 
         
         console.log(data)
-        document.getElementById("UID").innerHTML=data[0];
+        if(data['success']==false)
+        {
+          document.getElementById("Error").innerHTML=data['message'];
+          document.getElementById("show_selection").style.display="none";
+        }
+        else
+        {
+          document.getElementById("Error").innerHTML="";
+          document.getElementById("UID").innerHTML=data['message'];
 
+        }
+        
         });
       }
     </script>

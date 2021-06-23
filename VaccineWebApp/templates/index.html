@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flask - AJAX Form</title>
+    <title>Vaccination Portal</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
   </head>
@@ -19,6 +19,8 @@
           {{ form.district(id="district_select", class="form-control") }}
           <br><br>
           {{ form.vaccine(id="vaccine_select", class="form-control") }}
+          <br><br>
+          {{ form.dose(id="dose_select", class="form-control") }}
           <br><br>
           <button type="button" class="btn btn-primary" id="submit-btn" style="background-color: black;">Submit</button>
           <button type="button" class="btn btn-success" onclick= "window.location.href='/state'" id="refresh1-btn" style="background-color: black;">Refresh</button>
@@ -37,6 +39,7 @@
               <th>VACCINE VARIANT</th>
               <th>DATE</th>
               <th>SLOTS</th>
+              <th>TIME</th>
             </tr>
           </thead>
           <tbody>
@@ -46,6 +49,13 @@
               <td><span id="chosen_vaccine"></span></td>
               <td><span id="chosen_date">Today</td>
               <td><span id="chosen_slot"></td>
+              <td><select name="time" id="time">
+                <option value="9AM-10AM">9AM-10AM</option>
+                <option value="11AM-12PM">11AM-12PM</option>
+                <option value="2PM-3PM">2PM-3PM</option>
+                <option value="3PM-4PM">3PM-4PM</option>
+              </select></td>
+
               <td><button type="button" class="btn btn-primary" id="book-btn">Book</button></td>
             </tr>
             <tr>
@@ -54,6 +64,12 @@
               <td><span id="chosen_vaccine1"></span></td>
               <td><span id="chosen_date1">Tomorrow</td>
                 <td><span id="chosen_slot1"></td>
+                  <td><select name="time1" id="time1">
+                    <option value="9AM-10AM">9AM-10AM</option>
+                    <option value="11AM-12PM">11AM-12PM</option>
+                    <option value="2PM-3PM">2PM-3PM</option>
+                    <option value="3PM-4PM">3PM-4PM</option>
+                  </select></td>
                <td> <button type="button" class="btn btn-primary" id="book1-btn">Book</button></td>
             </tr>
           </tbody>

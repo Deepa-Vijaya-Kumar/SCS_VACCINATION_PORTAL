@@ -69,6 +69,13 @@ $(function() {
 
 
   $("#vaccine_select").change(function() {
+    $("#dose_select").show();
+
+
+  });
+
+  $("#dose_select").change(function() {
+
     $("#submit-btn").prop("disabled", false)
 
   });
@@ -160,15 +167,24 @@ $(function() {
     var state = $("#state_select").find(":selected").text();
     var district = $("#district_select").find(":selected").text();
     var vaccine = $("#vaccine_select").find(":selected").text();
+    var dose = $("#dose_select").find(":selected").text();
+    var time = $("#time").find(":selected").text();
+    console.log(dose)
+    console.log(time)
 
-    window.location.href = '/book/'+state+'/'+district+'/'+vaccine+'/today/'
+
+    window.location.href = '/book/'+state+'/'+district+'/'+vaccine+'/'+dose+'/'+time+'/today/'
   });
   $("#book1-btn").click(function() {
     //grab values
     var state = $("#state_select").find(":selected").text();
     var district = $("#district_select").find(":selected").text();
     var vaccine = $("#vaccine_select").find(":selected").text();
+    var dose = $("#dose_select").find(":selected").text();
+    var time = $("#time").find(":selected").text();
+    console.log(dose)
+    console.log(time)
 
-    window.location.href = '/book/'+state+'/'+district+'/'+vaccine+'/tomorrow/'
+    window.location.href = '/book/'+state+'/'+district+'/'+vaccine+'/'+dose+'/'+time+'/tomorrow/'
   });
 });

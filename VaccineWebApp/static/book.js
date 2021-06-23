@@ -16,6 +16,7 @@ $(function() {
         var proof_id = $("#proof_id").val();
         $("#chosen_proof_id").html(proof_id);
 
+
         
     });
 
