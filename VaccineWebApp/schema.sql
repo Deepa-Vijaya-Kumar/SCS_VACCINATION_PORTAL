@@ -70,7 +70,7 @@ INSERT INTO district (id, district_name, state_id) VALUES (19, "Lehe--Stadthalle
 INSERT INTO district (id, district_name, state_id) VALUES (20, "Aumund-Hammersbeck--Vaccination centre Bremen-Vegesack", 4);
 
 
-INSERT INTO vaccine (id, vaccine_name,district_id,today_slot,tomorrow_slot) VALUES (1, "BioNTech-Pfizer",1,10,20);
+INSERT INTO vaccine (id, vaccine_name,district_id,today_slot,tomorrow_slot) VALUES (1, "BioNTech-Pfizer",1,0,20);
 INSERT INTO vaccine (id, vaccine_name,district_id,today_slot,tomorrow_slot) VALUES (2, "AstraZeneca",1,31,30);
 INSERT INTO vaccine (id, vaccine_name,district_id,today_slot,tomorrow_slot) VALUES (3, "Johnson & Johnson",1,30,40);
 INSERT INTO vaccine (id, vaccine_name,district_id,today_slot,tomorrow_slot) VALUES (4, "Moderna",1,40,50);

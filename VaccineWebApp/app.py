@@ -125,18 +125,30 @@ def manipulate_db(district,vaccine,date,dose,health_id):
             dose1_date=datetime.datetime.strptime(rows[0][0],"%d/%m/%Y")
             dose2_date=dose1_date+datetime.timedelta(days=duration[vaccine])
             cur.execute("SELECT vaccine_name from vaccine_status where health_id='{}'".format(health_id))
-            rows = cur.fetchall()
-            if rows[0][0]!=vaccine:
+            rows = cur.fetchall()  
+            if rows[0][0]!="AstraZeneca" or vaccine!="Moderna":
+                if rows[0][0]!="Moderna" or vaccine!="AstraZeneca":  
+                    if rows[0][0]!=vaccine:
+                        response = {
+                        "success": False,
+                        "message": "Booking for Dose-2 can be done only for "+rows[0][0]
+                        }
+                        response = make_response(json.dumps(response))
+                        response.content_type = 'application/json'
+                        return response 
+        elif dose=="Dose-2":
+            cur.execute("SELECT * from vaccine_status where health_id='{}'".format(health_id))
+            rows = cur.fetchall()  
+            if len(rows)==0:
                 response = {
-                "success": False,
-                "message": "Booking for Dose-2 can be done only for "+rows[0][0]
-                }
+                        "success": False,
+                        "message": "Booking for Dose-2 cannot be done before Dose-1! Please book for Dose-1 first!"
+                        }
                 response = make_response(json.dumps(response))
                 response.content_type = 'application/json'
                 return response 
 
-
-            
+          
             # print(dose2_date< datetime.datetime.now())
 
         if date.lower()=='today':
