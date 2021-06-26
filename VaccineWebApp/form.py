@@ -11,6 +11,6 @@ class TestForm(Form):
 
 class BookForm(Form):
     user_name=StringField('Full Name', [validators.required(), validators.length(max=20)])
-    proof_id=StringField('Heath Insurance ID', [validators.DataRequired(), validators.length(max=10,min=10)])
+    proof_id=StringField('Heath Insurance ID', [validators.required(), validators.length(max=10)])
     submit=SubmitField("Register")
     
