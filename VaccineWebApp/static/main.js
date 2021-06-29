@@ -181,7 +181,7 @@ $(function() {
     var district = $("#district_select").find(":selected").text();
     var vaccine = $("#vaccine_select").find(":selected").text();
     var dose = $("#dose_select").find(":selected").text();
-    var time = $("#time").find(":selected").text();
+    var time = $("#time1").find(":selected").text();
     console.log(dose)
     console.log(time)
 
