@@ -75,7 +75,8 @@ $(function() {
   });
 
   $("#dose_select").change(function() {
-
+//    $("#submit-btn").removeClass("btn-default")
+//    $("#submit-btn").addClass("btn-success")
     $("#submit-btn").prop("disabled", false)
 
   });

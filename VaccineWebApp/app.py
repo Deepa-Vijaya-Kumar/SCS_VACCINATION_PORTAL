@@ -24,7 +24,8 @@ def index():
     chosen_state = None
     chosen_district = None
     
-    return render_template('index.html', form=form)
+    return render_template('index.html', form=form, analytics=vaccine_analytics())
+
 
 @app.route("/book/<string:state>/<string:district>/<string:vaccine>/<string:dose>/<string:time>/<string:date>/", methods=["GET", "POST"])
 def book(state,district,vaccine,date,dose,time):
@@ -34,7 +35,7 @@ def book(state,district,vaccine,date,dose,time):
     form = BookForm(request.form)
 
     # if request.method=="GET":
-    return render_template('book.html', form=form,district =district,state=state,vaccine=vaccine,date=date,dose=dose,time=time)
+    return render_template('book.html', form=form,district =district,state=state,vaccine=vaccine,date=date,dose=dose,time=time, analytics=vaccine_analytics())
     # elif request.method=="POST":
     #     if form.validate()==False:
     #         flash("All fields are required")
@@ -91,7 +92,7 @@ def manipulate_db(district,vaccine,date,dose,health_id):
     duration={ "BioNTech-Pfizer": 21,
                 "AstraZeneca": 28,
                 "Johnson & Johnson": 56,
-                "Moderna":28}
+                "Moderna": 28}
 
     district_id = [
         (x[0]) for x in query_db("district")
@@ -197,6 +198,15 @@ def manipulate_db(district,vaccine,date,dose,health_id):
     response = make_response(json.dumps(response))
     response.content_type = 'application/json'
     return response
+
+
+def vaccine_analytics():
+    connection = sqlite3.connect('test.db')
+    cur = connection.cursor()
+    cur.execute("select count(*) from vaccine_status v")
+    rows = cur.fetchall()
+    return {"OneDose": 7639, 'fullyVaccinated': 12323, 'eligibleVaccineTakers': 1253,
+                 'pastWeek': 2463, 'pastMonth': 9877, 'registered': 20000 + rows[0][0]}
 
 if __name__ == "__main__":
 

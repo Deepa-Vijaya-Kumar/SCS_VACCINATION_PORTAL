@@ -2,14 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Vaccination Portal</title>
+    <title>Vaccination Registration</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
   </head>
   <body>
 
-    <div class="container">
-      <h1 style="text-align: center;font-style: italic; font-weight: bold;" >VACCINATION PORTAL</h1><br><br>
+    <div class="row" style="margin-top: 5%">
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
+        <div class="container">
+
+      <h1 style="text-align: center;font-style: italic; font-weight: bold;" >VACCINATION REGISTRATION</h1><br><br>
 
       <div id="state_selection">
         <form action="/" method="POST">
@@ -45,10 +49,10 @@
           <tbody>
             <tr>
               <td><span id="chosen_state"></span></td>
-              <td><span id="chosen_district"></td>
+              <td><span id="chosen_district"></span></td>
               <td><span id="chosen_vaccine"></span></td>
-              <td><span id="chosen_date">Today</td>
-              <td><span id="chosen_slot"></td>
+              <td><span id="chosen_date">Today</span></td>
+              <td><span id="chosen_slot"></span></td>
               <td><select name="time" id="time" style="color: black;">
                 <option value="9AM-10AM">9AM-10AM</option>
                 <option value="11AM-12PM">11AM-12PM</option>
@@ -60,10 +64,10 @@
             </tr>
             <tr>
               <td><span id="chosen_state1"></span></td>
-              <td><span id="chosen_district1"></td>
+              <td><span id="chosen_district1"></span></td>
               <td><span id="chosen_vaccine1"></span></td>
-              <td><span id="chosen_date1">Tomorrow</td>
-                <td><span id="chosen_slot1"></td>
+              <td><span id="chosen_date1">Tomorrow</span></td>
+                <td><span id="chosen_slot1"></span></td>
                   <td><select name="time1" id="time1" style="color: black;">
                     <option value="9AM-10AM">9AM-10AM</option>
                     <option value="11AM-12PM">11AM-12PM</option>
@@ -77,6 +81,9 @@
       </div>
 
     </div>
+      </div>
+    </div>
+    {% include 'analytics.html' %}
 
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
