@@ -24,5 +24,5 @@ $(function() {
     $("#proof_id").change(function() {
         $("#register-btn").prop("disabled", false)
     });
-    
+
   });
