@@ -1,7 +1,7 @@
 $(function() {
 
     // test to ensure jQuery is working
-    console.log("whee!")
+//    console.log("whee!")
 
     $("#register-btn").prop("disabled", true)
 
@@ -24,5 +24,12 @@ $(function() {
     $("#proof_id").change(function() {
         $("#register-btn").prop("disabled", false)
     });
-    
+
+//    $("#proof_id").on("keyup",function() {
+//        if ($("#proof_id").val().length === 0) {
+//            $("#register-btn").prop("disabled", true)
+//        } else {
+//            $("#register-btn").prop("disabled", false)
+//        }
+//    });
   });
