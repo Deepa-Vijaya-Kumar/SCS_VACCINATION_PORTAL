@@ -2,7 +2,7 @@
 
 ### Functionality
 * Book the vaccination slots given the candidate details
-User can select State,district-messe and vaccine varaint of Germany and book a slot for vaccination by providing their Name and ID.
+* User can select State,district-messe and vaccine varaint of Germany and book a slot for vaccination by providing their Name and ID.
 ### Install
 
 1. Clone repo
