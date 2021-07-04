@@ -205,8 +205,10 @@ def vaccine_analytics():
     cur = connection.cursor()
     cur.execute("select count(*) from vaccine_status v")
     rows = cur.fetchall()
-    return { "OneDose": 37639 + rows[0][0], 'fullyVaccinated': 12323, 'eligibleVaccineTakers': 1253,
-                 'pastWeek': 2463, 'pastMonth': 9877, 'registered': 19962 + rows[0][0]}
+    fullyVaccinated = 12323
+    oneDose = 37639
+    return { "OneDose": oneDose + rows[0][0], 'fullyVaccinated': fullyVaccinated, 'eligibleVaccineTakers': 1253,
+                 'pastWeek': 2463, 'pastMonth': 9877, 'registered': oneDose + fullyVaccinated + rows[0][0]}
 
 if __name__ == "__main__":
 
