@@ -90,9 +90,9 @@ def get_request2(vaccine,district):
 def manipulate_db(district,vaccine,date,dose,health_id):
     duration={ "BioNTech-Pfizer": 21,
                 "AstraZeneca": 28,
-                "Johnson & Johnson": 56,
-                "Moderna":28}
-
+                "Johnson &amp; Johnson": 56,
+                "Moderna":28 }
+    print(vaccine)
     district_id = [
         (x[0]) for x in query_db("district")
         if x[1] == district]
